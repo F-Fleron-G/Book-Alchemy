@@ -1,0 +1,99 @@
+{% extends "layout.html" %}
+{% block title %}Book Suggestion | Book Alchemy{% endblock %}
+
+{% block content %}
+<div class="suggestion-wrapper">
+  <div class="suggestion-prompt">
+    <div class="suggestion-header">
+      <img src="{{ url_for('static', filename='images/suggestion_image.png') }}" alt="Suggestion Icon" class="suggestion-icon">
+      <h1 class="suggestion-title">Need a Book to Read?</h1>
+    </div>
+
+    <p>Click the button below and let the alchemy happen...</p>
+    <form method="POST" action="/suggest">
+      <button class="suggest-btn" type="submit">You may like this one...</button>
+    </form>
+
+    {% if message %}
+      <p id="suggestion-result" class="success-suggest" style="margin-top: 5rem;">{{ message }}</p>
+      <p>Look it up and add it to your collection!</p>
+    {% endif %}
+  </div>
+
+  <!-- Carousel -->
+  <div class="suggestion-carousel">
+    <h3 class="carousel-header">Your Current Library</h3>
+    <div class="carousel-container">
+      <button class="carousel-btn left" onclick="scrollCarousel(-1)">←</button>
+      <div class="carousel-track" id="bookCarousel">
+        {% for book in books %}
+          <div class="carousel-item">
+            {% if book.isbn %}
+              <img src="https://covers.openlibrary.org/b/isbn/{{ book.isbn }}-M.jpg"
+                   alt="Cover for {{ book.title }}">
+            {% endif %}
+            <div class="carousel-content">
+              <a href="{{ url_for('book_detail', book_id=book.id) }}">{{ book.title }}</a>
+              <small>
+                <a href="{{ url_for('author_detail', author_id=book.author.id) }}">
+                  {{ book.author.name }}
+                </a>
+              </small>
+              {% if book.rating %}
+                {% set full_stars = book.rating|int %}
+                {% set half_star = 1 if book.rating - full_stars >= 0.5 else 0 %}
+                {% set empty_stars = 5 - full_stars - half_star %}
+                <div class="star-rating">
+                  {% for _ in range(full_stars) %}<i class="fas fa-star"></i>{% endfor %}
+                  {% if half_star %}<i class="fas fa-star-half-alt"></i>{% endif %}
+                  {% for _ in range(empty_stars) %}<i class="far fa-star"></i>{% endfor %}
+                </div>
+              {% endif %}
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+      <button class="carousel-btn right" onclick="scrollCarousel(1)">→</button>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+  function scrollCarousel(direction) {
+    const track = document.getElementById('bookCarousel');
+    const item = track.querySelector('.carousel-item');
+    if (!item) return;
+
+    const scrollAmount = item.offsetWidth + 24;
+
+    if (direction === 1) {
+      track.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+
+      setTimeout(() => {
+        if (track.scrollLeft + track.offsetWidth >= track.scrollWidth - 1) {
+          track.scrollTo({ left: 0, behavior: 'smooth' });
+        }
+      }, 300);
+    } else {
+      track.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+
+      setTimeout(() => {
+        if (track.scrollLeft <= 0) {
+          track.scrollTo({ left: track.scrollWidth, behavior: 'smooth' });
+        }
+      }, 300);
+    }
+  }
+</script>
+<script>
+  window.addEventListener('DOMContentLoaded', () => {
+    const suggestion = document.getElementById('suggestion-result');
+    if (suggestion) {
+      suggestion.scrollIntoView({ behavior: 'smooth' });
+    }
+  });
+</script>
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+{% block title %}Update Author{% endblock %}
+
+{% block content %}
+<div class="update-wrapper">
+  <div class="update-inner">
+    <div class="update-header">
+      <img src="{{ url_for('static', filename='images/add_author_img.png') }}" alt="Update Author" class="update-icon">
+      <h1 class="update-title">Update Author</h1>
+    </div>
+
+    {% if message %}
+      <p class="success">{{ message }}</p>
+    {% endif %}
+
+    <form action="{{ url_for('update_author', author_id=author.id) }}" method="POST" class="form-fields">
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" value="{{ author.name }}" required>
+
+      <label for="birth_date">Birth Date:</label>
+      <input type="date" id="birth_date" name="birth_date" value="{{ author.birth_date }}">
+
+      <label for="date_of_death">Date of Death:</label>
+      <input type="date" id="date_of_death" name="date_of_death" value="{{ author.date_of_death }}">
+    </form>
+
+     <button type="submit" class="update-pg-btn">Update Author</button>
+    <a href="/" class="back-home-btn" aria-label="Back to Home">←</a>
+  </div>
+</div>
+{% endblock %}

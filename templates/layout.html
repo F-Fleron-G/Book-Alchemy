@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>{% block title %}Book Alchemy{% endblock %}</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body id="top">
+
+<header class="site-header">
+  <div class="logo-title">
+    <a href="/">
+      <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Book Alchemy Logo" class="logo">
+    </a>
+  </div>
+  <nav class="nav-links">
+    <a href="/#books">Books</a>
+    <a href="/add_author">Add Author</a>
+    <a href="/add_book">Add Book</a>
+    <a href="/#about">About</a>
+  </nav>
+</header>
+{% block first_extra_content %}{% endblock %}
+
+<main class="container">
+  {% block content %}{% endblock %}
+</main>
+
+{% block extra_content %}{% endblock %}
+<div class="footer-wrapper">
+  <a href="#top" class="back-to-top" aria-label="Back to Top">↑</a>
+  <footer>
+    <p>Created by Frederic G. Fleron</p>
+    <p>&copy; 2025 Book Alchemy</p>
+    <p>All rights reserved</p>
+  </footer>
+</div>
+<script>
+  function closeSearchModal() {
+    const url = new URL(window.location);
+    url.searchParams.delete("q");
+    window.location.href = url.pathname + url.search;  // reload the page without ?q=
+  }
+</script>
+{% block scripts %}{% endblock %}
+</body>
+</html>

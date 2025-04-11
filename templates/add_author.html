@@ -1,0 +1,38 @@
+{% extends "layout.html" %}
+{% block title %}Add Author{% endblock %}
+{% block content %}
+<div class="form-wrapper">
+  <div class="form-left">
+    <div class="form-header">
+      <img src="{{ url_for('static', filename='images/add_author_img.png') }}" alt="Add Author Icon" class="form-icon-ath">
+      <h1 class="form-title">Add Author</h1>
+    </div>
+    {% if message %}
+      <p class="success">{{ message }}</p>
+    {% endif %}
+    <form action="/add_author" method="POST" class="form-fields">
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" required>
+
+      <label for="birth_date">Birth Date:</label>
+      <input type="date" id="birth_date" name="birth_date">
+
+      <label for="date_of_death">Date of Death:</label>
+      <input type="date" id="date_of_death" name="date_of_death">
+
+      <button type="submit">Add Author</button>
+    </form>
+    <a href="/" class="back-home-btn" aria-label="Back to Home">←</a>
+
+  </div>
+
+  <a href="/add_book" class="form-right-link">
+    <div class="form-right">
+      <img src="{{ url_for('static', filename='images/add_book_img.png') }}" alt="Add Book Icon" class="form-icon-large">
+      <h2>Add Book</h2>
+    </div>
+  </a>
+</div>
+
+
+{% endblock %}

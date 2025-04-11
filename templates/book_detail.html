@@ -1,0 +1,86 @@
+{% extends "layout.html" %}
+{% block title %}Book Details{% endblock %}
+
+{% block content %}
+<div class="form-wrapper">
+  <!-- LEFT COLUMN -->
+  <div class="form-left">
+    <div class="form-header">
+      {% if book.isbn %}
+        <img src="https://covers.openlibrary.org/b/isbn/{{ book.isbn }}-L.jpg"
+         onerror="this.onerror=null; this.src='{{ url_for('static', filename='images/default_book.png') }}';"
+         alt="Cover for {{ book.title }}"
+         class="detail-image fallback">
+      {% endif %}
+      <h1 class="form-title">{{ book.title }}</h1>
+    </div>
+
+    <div class="form-fields-dtls">
+      <p>{{ book.summary or "No description available." }}</p>
+
+      {% if book.rating %}
+        {% set full_stars = book.rating|int %}
+        {% set half_star = 1 if book.rating - full_stars >= 0.5 else 0 %}
+        {% set empty_stars = 5 - full_stars - half_star %}
+        <div class="star-rating" style="margin: 1rem 0;">
+          <strong>Ratings:</strong>
+          {% for _ in range(full_stars) %}
+            <i class="fas fa-star"></i>
+          {% endfor %}
+          {% if half_star %}
+            <i class="fas fa-star-half-alt"></i>
+          {% endif %}
+          {% for _ in range(empty_stars) %}
+            <i class="far fa-star"></i>
+          {% endfor %}
+
+        </div>
+       {% if book.publication_year %}
+            <p><strong>Published:</strong> {{ book.publication_year }}</p>
+          {% endif %}
+          <p><strong>ISBN:</strong> {{ book.isbn }}</p>
+      {% endif %}
+    </div>
+
+    <div class="action-btns">
+      <form action="{{ url_for('update_book', book_id=book.id) }}" method="GET" style="display: inline;">
+        <button type="submit" class="update-btn">Update</button>
+      </form>
+
+    <form action="{{ url_for('delete_book', book_id=book.id) }}" method="POST"
+          onsubmit="return confirm('Are you sure you want to delete this book?');"
+          style="display: inline;">
+      <button class="delete-btn" type="submit">Delete</button>
+    </form>
+  </div>
+
+    <a href="/" class="back-home-btn" aria-label="Back to Home">←</a>
+  </div>
+
+  <!-- RIGHT COLUMN -->
+  <div class="form-right book-listing">
+    {% if book.author %}
+      <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+        {% if book.author.image_url %}
+          <img src="{{ book.author.image_url }}" alt="{{ book.author.name }}"
+               style="width: 60px; height: auto; border-radius: 6px;">
+        {% endif %}
+        <h3 style="margin: 0;">{{ book.author.name }}</h3>
+      </div>
+
+      <h4>Other Books by {{ book.author.name }}</h4>
+      <ul style="text-align: left;">
+        {% for other_book in book.author.books %}
+          {% if other_book.id != book.id %}
+            <li>
+              <a href="{{ url_for('book_detail', book_id=other_book.id) }}">
+                {{ other_book.title }}
+              </a>
+            </li>
+          {% endif %}
+        {% endfor %}
+      </ul>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}
