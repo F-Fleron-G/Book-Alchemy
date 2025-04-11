@@ -5,3 +5,5 @@ data/*.sqlite
 *.db
 .env
 .DS_Store
+images/
+.idea/
