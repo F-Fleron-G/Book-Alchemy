@@ -47,8 +47,9 @@ Book Alchemy is a cozy digital library built with Flask and SQLAlchemy where you
 ---
 
 ## Licence
-This project is licensed under the MIT Licence. 
-See [LICENCE](LICENCE) for details.
+This project is licensed under the [MIT License](https://mit-license.org/).
+See [LICENSE](LICENSE) for details.
+
 
 ---
 
