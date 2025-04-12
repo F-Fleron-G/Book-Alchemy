@@ -14,7 +14,7 @@ Book Alchemy is a cozy digital library built with Flask and SQLAlchemy where you
 ## ✨ Features
 
 - 📖 Add, view, update, and delete books and authors
-- 🌟 Book ratings (1–10)
+- 🌟 Book ratings (1–5)
 - 🔍 Search by title or sort by author
 - 💡 AI-style random book suggestions (based on genres like spirituality, stoicism, music, etc.)
 - 💻 Responsive and animated UI built with custom CSS
