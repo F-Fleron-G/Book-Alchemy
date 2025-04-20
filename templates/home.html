@@ -82,10 +82,38 @@
 {% block content %}
 <h1 class="section-heading" id="books">Your Favourite Books</h1>
 
-  <p class="sort-links">Sort by:
-    <a href="/?sort=title">Title</a> |
-    <a href="/?sort=author">Author</a>
-  </p>
+   <form method="GET" action="/" style="margin-bottom: 2rem;">
+    <label for="sort" style="font-weight: bold;">Sort by:</label>
+    <select id="sort" name="sort" onchange="this.form.submit()" style="margin-left: 0.5rem;">
+    {% if sort == 'title' %}
+      <option value="title" selected>Title</option>
+    {% else %}
+      <option value="title">Title</option>
+    {% endif %}
+
+    {% if sort == 'author' %}
+      <option value="author" selected>Author</option>
+    {% else %}
+      <option value="author">Author</option>
+    {% endif %}
+
+    {% if sort == 'rating' %}
+      <option value="rating" selected>Rating</option>
+    {% else %}
+      <option value="rating">Rating</option>
+    {% endif %}
+
+    {% if sort == 'year' %}
+      <option value="year" selected>Year</option>
+    {% else %}
+      <option value="year">Year</option>
+    {% endif %}
+  </select>
+
+    {% if search_query %}
+      <input type="hidden" name="q" value="{{ search_query }}">
+    {% endif %}
+  </form>
 
   {% if books %}
     <ul class="book-list">

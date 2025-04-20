@@ -970,7 +970,7 @@ img.fallback {
 }
 
 .carousel-item img {
-  height: 270px; /* Consistent height */
+  height: 270px;
   width: auto;
   object-fit: contain;
   display: block;

@@ -121,11 +121,11 @@ def home():
 
         Query Params:
             q (str): Keyword to search for in book titles.
-            sort (str): Sort by 'title' or 'author'.
-            message (str): Optional feedback message.
+            sort (str): Sort criteria - 'title', 'author', 'rating', or 'year'.
+            message (str): Optional feedback message (e.g., after adding or deleting).
 
         Returns:
-            Rendered template for the home page.
+            Rendered template for the home page with applied sorting and filtering.
     """
 
     search_query = request.args.get("q", "").strip()
@@ -139,6 +139,10 @@ def home():
 
     if sort == "author":
         books_query = books_query.join(Author).order_by(Author.name)
+    elif sort == "rating":
+        books_query = books_query.order_by(Book.rating.desc().nullslast())
+    elif sort == "year":
+        books_query = books_query.order_by(Book.publication_year.desc().nullslast())
     else:
         books_query = books_query.order_by(Book.title)
 
@@ -293,6 +297,7 @@ def delete_book(book_id):
         Returns:
             Redirect to home with success message.
     """
+
     book = Book.query.get_or_404(book_id)
     author = book.author
 

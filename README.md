@@ -15,7 +15,7 @@ Book Alchemy is a cozy digital library built with Flask and SQLAlchemy where you
 
 - 📖 Add, view, update, and delete books and authors
 - 🌟 Book ratings (1–5)
-- 🔍 Search by title or sort by author
+- 🔍 Search by title with sorting options: title, author, rating, or year
 - 💡 AI-style random book suggestions (based on genres like spirituality, stoicism, music, etc.)
 - 💻 Responsive and animated UI built with custom CSS
 - 🔗 Wikipedia integration for summaries and images
@@ -34,15 +34,29 @@ Book Alchemy is a cozy digital library built with Flask and SQLAlchemy where you
 
 ## 🚀 Running the App
 
-1. **Install dependencies**:
+1. **Create the environment**:
    ```bash
-   pip install flask sqlalchemy wikipedia
+   python3 -m venv .venv
 
-2. **Run the Flask app**:
+2. **Activate it**:
+
+- macOS/Linux:
+  ```bash
+  source .venv/bin/activate
+
+- Windows:
+  ```bash
+  .venv\Scripts\activate
+
+3. **Install dependencies**:
+   ```bash
+   pip install -r requirements.txt
+
+4. **Run the Flask app**:
    ```bash
    python3 app.py
 
-3. Visit http://localhost:5000 in your browser.
+5. Visit http://localhost:5000 in your browser.
 
 ---
 
