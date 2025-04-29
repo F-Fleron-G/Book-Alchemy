@@ -78,3 +78,9 @@ See the [LICENSE](LICENSE) file for full details.
 ## 👊🏼 Contributing
 Have a fix or a feature to add? Feel free to submit a Pull Request. 
 For any large changes, please open an issue first to discuss.
+
+---
+
+## 🔖 GitHub Topics
+
+python flask sqlalchemy books-library database web-app project
