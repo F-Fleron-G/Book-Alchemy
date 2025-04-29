@@ -22,7 +22,7 @@ Book Alchemy is a cozy digital library built with Flask and SQLAlchemy where you
 
 ---
 
-## 🛠 Tech Stack
+## 💻 Tech Stack
 
 - Python + Flask
 - SQLAlchemy + SQLite
@@ -59,7 +59,11 @@ Book Alchemy is a cozy digital library built with Flask and SQLAlchemy where you
 5. Visit http://localhost:5000 in your browser.
 
 ---
+## 🛠️ Planned Improvements
+- Enhance mobile responsiveness
+- Add more testing coverage
 
+---
 ## 📄 License
 This project is licensed under the [MIT License](LICENSE). 
 See the [LICENSE](LICENSE) file for full details.
