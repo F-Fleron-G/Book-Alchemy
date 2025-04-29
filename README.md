@@ -37,24 +37,29 @@ Book Alchemy is a cozy digital library built with Flask and SQLAlchemy where you
 1. **Create the environment**:
    ```bash
    python3 -m venv .venv
+   ```
 
 2. **Activate it**:
 
 - macOS/Linux:
   ```bash
   source .venv/bin/activate
+  ```
 
 - Windows:
   ```bash
   .venv\Scripts\activate
+  ```
 
 3. **Install dependencies**:
    ```bash
    pip install -r requirements.txt
+   ```
 
 4. **Run the Flask app**:
    ```bash
    python3 app.py
+   ```
 
 5. Visit http://localhost:5000 in your browser.
 
